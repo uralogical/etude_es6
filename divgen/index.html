@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<style>
+		.ball {
+			float: left;
+		}
+	</style>
+</head>
+<body>
+
+<script>
+!function(){
+
+class Ball {
+	constructor(width, height){
+		this.width = width;
+		this.height = height;
+		this.colors = ['#224687','#2ABFD4','#FFCD40','#E61875','#8BC34A','#AB47BC'];
+	}
+
+	make() {
+		$("<div>",{
+			"class": "ball",
+			width: `${this.width}px`,
+			height: `${this.height}px`,
+			css: {
+				backgroundColor: this.getColor(),
+				borderRadius: "50%"
+			}
+
+		}).appendTo("body");
+	}
+
+	getColor() {
+		return this.colors[Math.floor(Math.random() * this.colors.length)];
+	}
+
+}
+
+
+let ball = new Ball(50, 50);
+for (var i = 0; i < 81; i++) {
+	ball.make();
+}
+
+
+}();
+
+</script>
+</body>
+</html>
