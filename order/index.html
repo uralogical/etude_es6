@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<style>
+		.ordered_area {
+			border: 1px solid #333;
+			width: 400px;
+			min-height: 100px;
+			height: auto;
+		}
+	</style>
+</head>
+<body>
+
+<input class="" type="text">
+<button class="register">Register</button>
+<button class="randomize">Order!</button>
+<button class="clear">Clear</button>
+<div class="ordered_area"></div>
+
+<script>
+!function(){
+
+class Order {
+	constructor(args) {
+		this.names = [];
+		this.addEvent();
+	}
+
+	addEvent() {
+		$(".register").on("click", ()=> {
+			let $input = $("input");
+			let val = $input.val();
+			this.names.push(val);
+			$input.val("");
+		})
+
+		$(".randomize").on("click", ()=> {
+			this.randomize();
+		})
+
+		$(".clear").on("click", ()=> {
+			this.clear();
+		})
+	}
+
+	randomize() {
+		let len = this.names.length;
+		for (let i = 0; i < len; i++) {
+			let rand = Math.floor(Math.random() * (i + 1));
+			[this.names[i], this.names[rand]] = [this.names[rand], this.names[i]];
+		}
+		this.show()
+	}
+
+	clear() {
+		this.names = [];
+		$(".ordered_area").find("div").remove();
+	}
+
+	show() {
+		this.names.forEach(function(name, index) {
+			$("<div>", {
+				"class": "name"
+			}).appendTo(".ordered_area")
+				.text(`${index + 1}: ${name}`)
+				.hide()
+				.fadeIn(500);
+			
+		})
+	}
+}
+
+
+let order = new Order();
+
+
+
+
+}();
+
+</script>
+</body>
+</html>
