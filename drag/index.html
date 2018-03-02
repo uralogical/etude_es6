@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<style>
+		.material {
+			width: 100px;
+			height: 100px;
+			background-color: #1DAF9E;
+			position: absolute;
+			cursor: move;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+<div class="material"></div>
+<script>
+!function(){
+
+class Drag {
+	constructor() {
+		this.x = 0;
+		this.y = 0;
+		this.is_dragging = false;
+		this.drag();
+	}
+
+	drag() {
+		$(".material").on("mousedown", (e)=> {
+			this.is_dragging = true;
+			let event = e;
+
+			$("html").on("mousemove", (e)=> {
+				if (this.is_dragging === false) return;
+
+				this.x = e.pageX - event.offsetX;
+				this.y = e.pageY - event.offsetY;
+				this.move(".material");
+			})
+		})
+		this.drop();
+	}
+
+	drop() {
+		$(".material").on("mouseup", (e)=> {
+			this.is_dragging = false;
+			this.move(this);
+		})
+	}
+
+	move(dom) {
+		$(dom).css({
+			"top": this.y,
+			"left": this.x
+		})
+	}
+
+}
+
+let d = new Drag();
+
+
+}();
+
+</script>
+</body>
+</html>
