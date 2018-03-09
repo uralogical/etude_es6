@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<style>
+		table {
+			border: 1px #333 solid;
+			width: 400px;
+		}
+	</style>
+</head>
+<body>
+
+<table border="1">
+	<thead>
+		<tr>
+			<th class="id">ID</th>
+			<th class="name">NAME</th>
+			<th class="dept">DEPT</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="row">
+			<td>1</td>
+			<td>Masatoshi Atsumi</td>
+			<td>PS</td>
+		</tr>
+		<tr class="row">
+			<td>2</td>
+			<td>Koki Takahashi</td>
+			<td>TEAMTECH</td>
+		</tr>
+		<tr class="row">
+			<td>3</td>
+			<td>Sai Kyaw Phyo Wai</td>
+			<td>GS</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<script>
+!function(){
+
+class TableSort{
+	constructor(args) {
+		this.addEvents();
+	}
+
+	addEvents() {
+		$("th").on("click", function() {
+			let colIndex = $(this).index();
+			let arr = [];
+
+			$.each($("tbody tr"), function(index, elm) {
+				let $td = $(elm).find("td").eq(colIndex);
+				arr.push($td.text());
+			})
+			let sorted = arr.sort();
+			let htm = "";
+			sorted.forEach( function(elm, index) {
+				htm += "<tr>" + $(`tr:contains(${elm})`).html() + "</tr>"
+			})
+			$("tbody").hide()
+						.empty()
+						.append(htm)
+						.fadeIn()
+		})
+	}
+	
+}
+
+let t = new TableSort();
+
+
+}();
+
+</script>
+</body>
+</html>
